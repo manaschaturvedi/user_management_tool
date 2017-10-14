@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+	<div class="row">
+	<div class="col-sm-8">
+		<table class="table table-striped" id="users-table">
+			<thead>
+			  <tr>
+			    <th>Name</th>
+			    <th>Email</th>
+			    <th>Mobile</th>
+			    <th>Age</th>
+			    <th>Date of birth</th>
+			    <th>Location</th>
+			    <th></th>
+			  </tr>
+			</thead>
+			<tbody>
+			  {% for e in users %}
+			      <tr>
+			        <td>{{e.first_name|add:' '|add:e.last_name}}</td>
+			        <td>{{e.email}}</td>
+			        <td>{{e.mobile}}</td>
+			        <td>{{e.age}}</td>
+			        <td>{{e.dob}}</td>
+			        <td>{{e.location}}</td>
+			        <td></td>
+			      </tr>
+			  {% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+{% endblock content %}
