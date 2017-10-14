@@ -20,5 +20,5 @@ from user_management.views import listings_page, add_edit_users
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', listings_page, name='listings_page'),
-    url(r'^/add-edit-user', add_edit_users, name="add_edit_users")
+    url(r'^add-edit-user/', add_edit_users, name="add_edit_users")
 ]

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Pricebaba_Users
+from .forms import AddUpdateForm
 
 
 def listings_page(request):
@@ -10,7 +11,8 @@ def listings_page(request):
 
 
 def add_edit_users(request):
-	data = {}
+	form = AddUpdateForm()
+	data = {'form': form}
 
 	return render(request, 'add_edit_users.html', data)
 

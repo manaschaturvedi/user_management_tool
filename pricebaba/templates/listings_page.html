@@ -2,8 +2,21 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-
-	<div class="row">
+<div class="row">
+	<div class="col-sm-7">
+		
+	</div>
+	<div class="col-sm-2">
+		<div class="btn-group" role="group" aria-label="...">
+			<a href="/add-edit-user">
+			  	<button type="button" class="btn btn-default add-new-user-button">
+			  		<i class="fa fa-plus-circle" aria-hidden="true"></i>  <b>Add user</b>
+			  	</button>
+			</a>
+		</div>
+	</div>
+</div><br><br>
+<div class="row">
 	<div class="col-sm-8">
 		<table class="table table-striped" id="users-table">
 			<thead>
