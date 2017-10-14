@@ -11,7 +11,7 @@ class AddUpdateForm(forms.Form):
 	age = forms.IntegerField()
 	dob = forms.DateField(widget=forms.TextInput(attrs=
                                 {
-                                    'class':'datepicker'
+                                    'id':'datepicker'
                                 }))
 	location = forms.CharField()
 
