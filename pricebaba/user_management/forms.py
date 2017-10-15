@@ -14,6 +14,7 @@ class AddUpdateForm(forms.Form):
                                     'id':'datepicker'
                                 }))
 	location = forms.CharField()
+	user_id = forms.CharField(widget = forms.HiddenInput(), required = False)
 
 	helper = FormHelper()
 	helper.add_input(Submit('add-update-user-button', 'Add', css_class='btn-primary'))

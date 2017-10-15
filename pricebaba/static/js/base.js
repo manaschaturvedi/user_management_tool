@@ -31,11 +31,44 @@ $( document ).ready(function()
 
 	        google.maps.event.addListener(autocomplete, 'place_changed', function() {
             var place = autocomplete.getPlace();
-            console.log(place.address_components);
+            // console.log(place.address_components);
         });
     }
 
     initMap();
+
+    $( "#submit-id-add-update-user-button" ).click(function() 
+    {	
+    	first_name = $('input[name="first_name"]').val();
+    	last_name = $('input[name="last_name"]').val();
+    	age = $('input[name="age"]').val();
+    	dob = $('input[name="dob"]').val();
+    	place = $('input[name="location"]').val();
+    	mobile = $('input[name="mobile"]').val();
+    	email = $('input[name="email"]').val();
+    	user_id = $('input[name="user_id"]').val();
+    	new_user = (user_id == '') ? ('yes') : ('no');
+
+    	var url = base_url + '/add-update-user/';
+		var data = {
+			'email': email,
+			'first_name': first_name,
+			'last_name': last_name,
+			'age': age,
+			'dob': dob,
+			'place': place,
+			'mobile': mobile,
+			'user_id': user_id,
+			'new_user': new_user,
+			'csrfmiddlewaretoken': csrftoken,
+		};
+		$.post(url, data).done(function(result) {
+			window.location.href = "/";
+		}).fail(function(error) {
+			console.log(error);
+		});
+
+	});
 
  //    $( ".edit-user" ).click(function() 
  //    {	

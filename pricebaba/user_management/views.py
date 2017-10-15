@@ -19,6 +19,51 @@ def add_edit_users(request):
 	return render(request, 'add_edit_users.html', data)
 
 
+def add_update_user(request):
+	message = ''
+	if(request.POST.get('new_user').encode('utf8') == 'yes'):
+		usr = Pricebaba_Users(first_name=request.POST.get('first_name'),
+				last_name=request.POST.get('last_name'),age=request.POST.get('age'),dob=12345,
+				location=request.POST.get('place'),mobile=request.POST.get('mobile'),
+				email=request.POST.get('email'))
+		usr.save()
+		message = 'new user added'
+	else:
+		obj, created = Pricebaba_Users.objects.update_or_create(
+							    id=request.POST.get('user_id').encode('utf8'),
+							    defaults={'first_name':request.POST.get('first_name'),
+				'last_name':request.POST.get('last_name'),'age':request.POST.get('age'),'dob':12345,
+				'location':request.POST.get('place'),'mobile':request.POST.get('mobile'),
+				'email':request.POST.get('email')
+							   	},
+							)
+		message = 'existing user updated'
+
+	return HttpResponse(message)
+
+
+# def test_path(request):
+# 	# place = str(request.POST.get('place'));
+# 	# li = place.split(',')
+# 	# print li
+# 	# new_place = ''
+# 	# for e in li:
+# 	# 	new_place = new_place + e
+# 	# print new_place
+# 	# message = ''
+# 	if(request.POST.get('new_user').encode('utf8') == 'yes'):
+# 		usr = Pricebaba_Users(first_name=request.POST.get('first_name'),
+# 				last_name=request.POST.get('last_name'),age=request.POST.get('age'),dob=unicode(12345),
+# 				location=request.POST.get('place'),mobile=request.POST.get('mobile'),
+# 				email=request.POST.get('email'))
+		
+# 		usr.save()
+# 		message = 'new user added'
+# 	else:
+# 		message = 'existing user updated'
+
+# 	return HttpResponse(message)
+
 # def edit_user(request, user_id):
 # 	user_data = Pricebaba_Users.objects.get(id=user_id)
 # 	first_name = user_data.first_name
