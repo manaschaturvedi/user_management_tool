@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from user_management.views import listings_page, add_edit_users
+from user_management.views import listings_page, add_edit_users, edit_user
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', listings_page, name='listings_page'),
-    url(r'^add-edit-user/', add_edit_users, name="add_edit_users")
+    url(r'^add-edit-user/', add_edit_users, name="add_edit_users"),
+    url(r'^edit/(?P<user_id>\d+)/$', edit_user, name="edit_user"),
 ]

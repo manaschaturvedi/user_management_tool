@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% csrf_token %}
 
 {% block content %}
 <div class="row">
@@ -39,7 +40,7 @@
 			        <td>{{e.age}}</td>
 			        <td>{{e.dob}}</td>
 			        <td>{{e.location}}</td>
-			        <td></td>
+			        <td><a href='/edit/{{e.id}}' class="edit-user" data-email="{{e.email}}">edit</a></td>
 			      </tr>
 			  {% endfor %}
 			</tbody>
