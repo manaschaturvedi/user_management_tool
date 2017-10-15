@@ -37,19 +37,19 @@ $( document ).ready(function()
 
     initMap();
 
-    $( ".edit-user" ).click(function() 
-    {	
-  		var url = base_url + '/add-edit-user/';
-		var data = {
-			'email': $(this).data('email'),
-			'csrfmiddlewaretoken': csrftoken,
-		};
-		// $.post(url, data);
-		$.post(url, data).done(function(result) {
-			console.log(result);
-		}).fail(function(error) {
-			console.log(error);
-		});
-		// window.location.href = "/add-edit-user";
-	});
+ //    $( ".edit-user" ).click(function() 
+ //    {	
+ //  		var url = base_url + '/add-edit-user/';
+	// 	var data = {
+	// 		'email': $(this).data('email'),
+	// 		'csrfmiddlewaretoken': csrftoken,
+	// 	};
+	// 	// $.post(url, data);
+	// 	$.post(url, data).done(function(result) {
+	// 		console.log(result);
+	// 	}).fail(function(error) {
+	// 		console.log(error);
+	// 	});
+	// 	// window.location.href = "/add-edit-user";
+	// });
 });

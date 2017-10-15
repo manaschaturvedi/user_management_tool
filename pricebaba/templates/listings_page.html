@@ -40,7 +40,14 @@
 			        <td>{{e.age}}</td>
 			        <td>{{e.dob}}</td>
 			        <td>{{e.location}}</td>
-			        <td><a href='/edit/{{e.id}}' class="edit-user" data-email="{{e.email}}">edit</a></td>
+			        <!-- <td><a href='/edit/{{e.id}}' class="edit-user" data-email="{{e.email}}">edit</a></td> -->
+			        <td>
+			        	<form method='post' action='/add-edit-user/'>
+						   {% csrf_token %}
+						   <input type="email" name="email" value="{{e.email}}" hidden> 
+						   <button class="edit-user" type="submit">Edit</button>
+						</form>
+			        </td>
 			      </tr>
 			  {% endfor %}
 			</tbody>
