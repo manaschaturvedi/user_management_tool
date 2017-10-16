@@ -70,19 +70,22 @@ $( document ).ready(function()
 
 	});
 
- //    $( ".edit-user" ).click(function() 
- //    {	
- //  		var url = base_url + '/add-edit-user/';
-	// 	var data = {
-	// 		'email': $(this).data('email'),
-	// 		'csrfmiddlewaretoken': csrftoken,
-	// 	};
-	// 	// $.post(url, data);
-	// 	$.post(url, data).done(function(result) {
-	// 		console.log(result);
-	// 	}).fail(function(error) {
-	// 		console.log(error);
-	// 	});
-	// 	// window.location.href = "/add-edit-user";
-	// });
+	$("#id_mobile").change(function () 
+	{
+	      var mobile = $(this).val();
+	      $.ajax({
+	        url: '/validate-mobile/',
+	        data: {
+	          'mobile': mobile
+	        },
+	        dataType: 'json',
+	        success: function (data) 
+	        {
+	          if (data.is_error) 
+	          {
+	            $.notify(data.message);
+	          }
+	        }
+	      });
+    });
 });

@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from user_management.views import listings_page,add_edit_users,add_update_user
+from user_management.views import listings_page,add_edit_users,add_update_user,validate_mobile
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', listings_page, name='listings_page'),
     url(r'^add-edit-user/', add_edit_users, name="add_edit_users"),
     url(r'^add-update-user/', add_update_user, name="add_update_user"),
+    url(r'^validate-mobile/$', validate_mobile, name='validate_mobile'),
     # url(r'^test/', test_path, name="test_path"),
     # url(r'^edit/(?P<user_id>\d+)/$', edit_user, name="edit_user"),
 ]
