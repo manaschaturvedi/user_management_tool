@@ -56,3 +56,27 @@ def validate_mobile(request):
 	if(is_error == 1):
 		data['message'] = message
 	return JsonResponse(data)
+
+
+def validate_first_name(request):
+	first_name = request.GET.get('first_name', None)
+	message = ''
+	if not first_name.isalpha():
+		message = 'First name cannot contain numbers'
+	is_error = 1 if message != '' else 0
+	data = {'is_error': is_error}
+	if(is_error == 1):
+		data['message'] = message
+	return JsonResponse(data)
+
+
+def validate_last_name(request):
+	last_name = request.GET.get('last_name', None)
+	message = ''
+	if not last_name.isalpha():
+		message = 'Last name cannot contain numbers'
+	is_error = 1 if message != '' else 0
+	data = {'is_error': is_error}
+	if(is_error == 1):
+		data['message'] = message
+	return JsonResponse(data)

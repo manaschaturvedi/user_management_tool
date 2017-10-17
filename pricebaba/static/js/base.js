@@ -1,5 +1,7 @@
 $( document ).ready(function()
 {
+	// localStorage.setItem('button_text','Add');
+
 	function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -37,7 +39,7 @@ $( document ).ready(function()
 
     initMap();
 
-    $( "#submit-id-add-update-user-button" ).click(function() 
+    $( "#add-update-user-button" ).click(function() 
     {	
     	first_name = $('input[name="first_name"]').val();
     	last_name = $('input[name="last_name"]').val();
@@ -88,4 +90,54 @@ $( document ).ready(function()
 	        }
 	      });
     });
+
+    $("#id_first_name").change(function () 
+	{
+	      var first_name = $(this).val();
+	      $.ajax({
+	        url: '/validate-first-name/',
+	        data: {
+	          'first_name': first_name
+	        },
+	        dataType: 'json',
+	        success: function (data) 
+	        {
+	          if (data.is_error) 
+	          {
+	            $.notify(data.message);
+	          }
+	        }
+	      });
+    });
+
+    $("#id_last_name").change(function () 
+	{
+	      var last_name = $(this).val();
+	      $.ajax({
+	        url: '/validate-last-name/',
+	        data: {
+	          'last_name': last_name
+	        },
+	        dataType: 'json',
+	        success: function (data) 
+	        {
+	          if (data.is_error) 
+	          {
+	            $.notify(data.message);
+	          }
+	        }
+	      });
+    });
+   
+    $(".add-new-user-button").click(function() 
+    {
+		localStorage.setItem('button_text','Add');  
+	});
+
+	$(".edit-user").click(function() 
+    {
+		localStorage.setItem('button_text','Edit');  
+	});
+
+    $("#add-update-user-button").html(localStorage.getItem('button_text'));
 });
