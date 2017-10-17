@@ -36,8 +36,6 @@ def add_edit_users(request):
 
 def add_update_user(request):
 	dob = request.POST.get('dob');
-	# dob_datetime = datetime.datetime.strptime(str(request.POST.get('dob')), "%m/%d/%Y")
-	# dob = dob_datetime.strftime("%d %B %Y")
 	message = ''
 	if(request.POST.get('new_user').encode('utf8') == 'yes'):
 		usr = Pricebaba_Users(first_name=request.POST.get('first_name'),
