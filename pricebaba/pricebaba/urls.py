@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from user_management.views import listings_page,add_edit_users,add_update_user,validate_mobile,validate_first_name,validate_last_name
+from user_management.views import listings_page,add_edit_users,add_update_user,validate_mobile,validate_first_name,validate_last_name,validate_email,validate_age,validate_dob,validate_location
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -25,4 +25,8 @@ urlpatterns = [
     url(r'^validate-mobile/$', validate_mobile, name='validate_mobile'),
     url(r'^validate-first-name/$', validate_first_name, name='validate_first_name'),
     url(r'^validate-last-name/$', validate_last_name, name='validate_last_name'),
+    url(r'^validate-email/$', validate_email, name='validate_email'),
+    url(r'^validate-age/$', validate_age, name='validate_age'),
+    url(r'^validate-dob/$', validate_dob, name='validate_dob'),
+    url(r'^validate-location/$', validate_location, name='validate_location'),
 ]

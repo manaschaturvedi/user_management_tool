@@ -1,7 +1,5 @@
 $( document ).ready(function()
 {
-	// localStorage.setItem('button_text','Add');
-
 	function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -72,7 +70,7 @@ $( document ).ready(function()
 
 	});
 
-	$("#id_mobile").change(function () 
+	$("#id_mobile").blur(function () 
 	{
 	      var mobile = $(this).val();
 	      $.ajax({
@@ -91,7 +89,7 @@ $( document ).ready(function()
 	      });
     });
 
-    $("#id_first_name").change(function () 
+    $("#id_first_name").blur(function () 
 	{
 	      var first_name = $(this).val();
 	      $.ajax({
@@ -110,13 +108,89 @@ $( document ).ready(function()
 	      });
     });
 
-    $("#id_last_name").change(function () 
+    $("#id_last_name").blur(function () 
 	{
 	      var last_name = $(this).val();
 	      $.ajax({
 	        url: '/validate-last-name/',
 	        data: {
 	          'last_name': last_name
+	        },
+	        dataType: 'json',
+	        success: function (data) 
+	        {
+	          if (data.is_error) 
+	          {
+	            $.notify(data.message);
+	          }
+	        }
+	      });
+    });
+
+    $("#id_email").blur(function () 
+	{
+	      var email = $(this).val();
+	      $.ajax({
+	        url: '/validate-email/',
+	        data: {
+	          'email': email
+	        },
+	        dataType: 'json',
+	        success: function (data) 
+	        {
+	          if (data.is_error) 
+	          {
+	            $.notify(data.message);
+	          }
+	        }
+	      });
+    });
+
+    $("#id_age").blur(function () 
+	{
+	      var age = $(this).val();
+	      $.ajax({
+	        url: '/validate-age/',
+	        data: {
+	          'age': age
+	        },
+	        dataType: 'json',
+	        success: function (data) 
+	        {
+	          if (data.is_error) 
+	          {
+	            $.notify(data.message);
+	          }
+	        }
+	      });
+    });
+
+    $("#datepicker").blur(function () 
+	{
+	      var dob = $(this).val();
+	      $.ajax({
+	        url: '/validate-dob/',
+	        data: {
+	          'dob': dob
+	        },
+	        dataType: 'json',
+	        success: function (data) 
+	        {
+	          if (data.is_error) 
+	          {
+	            $.notify(data.message);
+	          }
+	        }
+	      });
+    });
+
+    $("#id_location").blur(function () 
+	{
+	      var location = $(this).val();
+	      $.ajax({
+	        url: '/validate-location/',
+	        data: {
+	          'location': location
 	        },
 	        dataType: 'json',
 	        success: function (data) 
@@ -136,7 +210,7 @@ $( document ).ready(function()
 
 	$(".edit-user").click(function() 
     {
-		localStorage.setItem('button_text','Edit');  
+		localStorage.setItem('button_text','Update');  
 	});
 
     $("#add-update-user-button").html(localStorage.getItem('button_text'));

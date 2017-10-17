@@ -11,7 +11,7 @@
 			<div class="btn-group" role="group" aria-label="...">
 				<a href="/">
 				  	<button type="button" class="btn btn-default cancel-button">
-				  		<i class="fa fa-plus-circle" aria-hidden="true"></i>  <b>Cancel</b>
+				  		<i class="fa fa-ban" aria-hidden="true"></i>  <b>Cancel</b>
 				  	</button>
 				</a>
 			</div>
@@ -22,11 +22,8 @@
 
 		<div class="col-sm-6">
 			{% crispy form %}
-			<!-- <button type="button" class="btn btn-default" id="add-update-user-button">
-				  		Add
-			</button> -->
-			<button id="add-update-user-button" type='button'>Add</button>
+			<button id="add-update-user-button" class="btn btn-default" type='button' style="background-color: #ffcccc;color:black;">Add</button>
 		</div>
 
-	</div>
+	</div><br><br>
 {% endblock content %}

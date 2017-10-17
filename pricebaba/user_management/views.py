@@ -7,7 +7,22 @@ import requests, datetime, time, re
 
 def listings_page(request):
 	pricebaba_users = Pricebaba_Users.objects.all()
-	data = {'users': pricebaba_users}
+	users_data = []
+	for e in pricebaba_users:
+		user_dict = {}
+		user_dict['id'] = e.id
+		user_dict['first_name'] = e.first_name
+		user_dict['last_name'] = e.last_name
+		user_dict['email'] = e.email
+		user_dict['age'] = e.age
+		dob_datetime = datetime.datetime.strptime(str(e.dob), "%m/%d/%Y")
+		dob = dob_datetime.strftime("%d %B %Y")
+		user_dict['dob'] = dob
+		user_dict['raw_dob'] = e.dob
+		user_dict['location'] = e.location
+		user_dict['mobile'] = e.mobile
+		users_data.append(user_dict)
+	data = {'users': users_data}
 
 	return render(request, 'listings_page.html', data)	
 
@@ -20,8 +35,9 @@ def add_edit_users(request):
 
 
 def add_update_user(request):
-	dob_datetime = datetime.datetime.strptime(str(request.POST.get('dob')), "%m/%d/%Y")
-	dob = int(dob_datetime.strftime("%s"))
+	dob = request.POST.get('dob');
+	# dob_datetime = datetime.datetime.strptime(str(request.POST.get('dob')), "%m/%d/%Y")
+	# dob = dob_datetime.strftime("%d %B %Y")
 	message = ''
 	if(request.POST.get('new_user').encode('utf8') == 'yes'):
 		usr = Pricebaba_Users(first_name=request.POST.get('first_name'),
@@ -47,7 +63,9 @@ def add_update_user(request):
 def validate_mobile(request):
 	mobile = request.GET.get('mobile', None)
 	message = ''
-	if(len(mobile) != 10):
+	if(mobile == ''):
+		message = 'Your mobile number cannot be blank'
+	elif(len(mobile) != 10):
 		message = 'Please enter a valid 10-digit mobile number'
 	elif(re.search('[a-zA-Z]', mobile)):
 		message = 'Your mobile number cannot contain letters'
@@ -61,8 +79,10 @@ def validate_mobile(request):
 def validate_first_name(request):
 	first_name = request.GET.get('first_name', None)
 	message = ''
-	if not first_name.isalpha():
-		message = 'First name cannot contain numbers'
+	if(first_name == ''):
+		message = 'First name cannot be blank'
+	elif not first_name.isalpha():
+		message = 'First name cannot contain numbers, spaces or special characters'
 	is_error = 1 if message != '' else 0
 	data = {'is_error': is_error}
 	if(is_error == 1):
@@ -73,10 +93,61 @@ def validate_first_name(request):
 def validate_last_name(request):
 	last_name = request.GET.get('last_name', None)
 	message = ''
-	if not last_name.isalpha():
-		message = 'Last name cannot contain numbers'
+	if(last_name == ''):
+		message = 'Last name cannot be blank'
+	elif not last_name.isalpha():
+		message = 'Last name cannot contain numbers, spaces or special characters'
 	is_error = 1 if message != '' else 0
 	data = {'is_error': is_error}
 	if(is_error == 1):
 		data['message'] = message
 	return JsonResponse(data)
+
+
+def validate_email(request):
+	email = request.GET.get('email', None)
+	message = ''
+	if(email == ''):
+		message = 'Email cannot be blank'
+	is_error = 1 if message != '' else 0
+	data = {'is_error': is_error}
+	if(is_error == 1):
+		data['message'] = message
+	return JsonResponse(data)
+
+
+def validate_age(request):
+	age = request.GET.get('age', None)
+	message = ''
+	if(age == ''):
+		message = 'Age cannot be blank'
+	is_error = 1 if message != '' else 0
+	data = {'is_error': is_error}
+	if(is_error == 1):
+		data['message'] = message
+	return JsonResponse(data)
+
+
+def validate_dob(request):
+	dob = request.GET.get('dob', None)
+	message = ''
+	if(dob == ''):
+		message = 'Date of birth cannot be blank'
+	is_error = 1 if message != '' else 0
+	data = {'is_error': is_error}
+	if(is_error == 1):
+		data['message'] = message
+	return JsonResponse(data)
+
+
+def validate_location(request):
+	location = request.GET.get('location', None)
+	message = ''
+	if(location == ''):
+		message = 'Location cannot be blank'
+	is_error = 1 if message != '' else 0
+	data = {'is_error': is_error}
+	if(is_error == 1):
+		data['message'] = message
+	return JsonResponse(data)
+
