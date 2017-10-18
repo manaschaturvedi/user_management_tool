@@ -10,17 +10,10 @@ def listings_page(request):
 	users_data = []
 	for e in pricebaba_users:
 		user_dict = {}
-		user_dict['id'] = e.id
-		user_dict['first_name'] = e.first_name
-		user_dict['last_name'] = e.last_name
-		user_dict['email'] = e.email
-		user_dict['age'] = e.age
 		dob_datetime = datetime.datetime.strptime(str(e.dob), "%m/%d/%Y")
 		dob = dob_datetime.strftime("%d %B %Y")
-		user_dict['dob'] = dob
-		user_dict['raw_dob'] = e.dob
-		user_dict['location'] = e.location
-		user_dict['mobile'] = e.mobile
+		user_dict = {'id':e.id, 'first_name':e.first_name,'last_name':e.last_name,'email':e.email,
+				'age':e.age,'dob':dob,'raw_dob':e.dob,'location':e.location,'mobile':e.mobile}
 		users_data.append(user_dict)
 	data = {'users': users_data}
 
